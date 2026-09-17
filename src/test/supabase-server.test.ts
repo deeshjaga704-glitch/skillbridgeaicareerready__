@@ -32,7 +32,10 @@ describe("server Supabase authentication", () => {
       expect.objectContaining({ cookies: expect.any(Object) }),
     );
 
-    const options = createServerClient.mock.calls[0]?.[2];
+    const call = createServerClient.mock.calls[0] as unknown as
+      | [string, string, { cookies: { getAll: () => unknown } }]
+      | undefined;
+    const options = call?.[2];
     expect(options?.cookies.getAll()).toEqual([
       { name: "sb-access-token", value: "cookie-value" },
     ]);

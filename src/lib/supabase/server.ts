@@ -29,7 +29,7 @@ export function createServerSupabaseClient() {
         for (const { name, value, options } of cookiesToSet) {
           setCookie(name, value, options as CookieOptions);
         }
-        setResponseHeaders(headers);
+        setResponseHeaders(headers as unknown as Parameters<typeof setResponseHeaders>[0]);
       },
     },
   });
